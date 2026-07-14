@@ -1,4 +1,4 @@
-RC-001: Hierarchical Enterprise Network Design and Implementation
+# RC-001: Hierarchical Enterprise Network Design and Implementation
 Project Overview
 
 This project presents the design, implementation, and evaluation of a hierarchical enterprise network for a fictional organization with a Headquarters (HQ) and three branch offices located in Accra, Kumasi, and Takoradi.
