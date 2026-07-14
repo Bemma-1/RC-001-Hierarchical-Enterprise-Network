@@ -7,7 +7,7 @@ The objective is to design a scalable, secure, and manageable network architectu
 
 The project was developed as part of a broader cybersecurity and networking research portfolio aimed at exploring enterprise network architecture, security controls, and resilient infrastructure design.
 
-Research Objectives
+#### Research Objectives:
 Design a scalable hierarchical enterprise network architecture.
 Implement logical network segmentation using VLANs.
 Deploy dynamic routing using OSPF.
