@@ -18,7 +18,7 @@ Document architectural decisions and implementation outcomes.
 Network Scope
 Headquarters (HQ)
 
-The headquarters serves as the core of the enterprise network and hosts:
+### The headquarters serves as the core of the enterprise network and hosts:
 
 Core routing infrastructure
 Distribution layer switching
@@ -27,13 +27,13 @@ Network management services
 User access networks
 Branch Offices
 
-The following branch offices are connected through routed WAN links:
+### The following branch offices are connected through routed WAN links:
 
 Accra Branch
 Kumasi Branch
 Takoradi Branch
 
-Each branch includes:
+### Each branch includes:
 
 User VLANs
 Local switching infrastructure
@@ -84,7 +84,7 @@ Access control through Layer 3 boundaries
 Routing protocol containment
 Testing and Validation
 
-The network is evaluated using structured test cases that verify:
+### The network is evaluated using structured test cases that verify:
 
 End-to-end connectivity
 Inter-VLAN routing
@@ -94,7 +94,7 @@ Branch-to-HQ communication
 Server accessibility
 Future Enhancements
 
-Potential improvements include:
+### Potential improvements include:
 
 HSRP gateway redundancy
 ACL-based traffic filtering
@@ -107,14 +107,15 @@ Author
 
 Emmanuel Ampong
 
-Research Interests:
+### Research Interests:
 
 Enterprise Networking
 Cybersecurity
 Network Automation
 Secure Infrastructure Design
 Threat Detection and Response
-Repository Structure
+
+### Repository Structure
 docs/
 diagrams/
 packet-tracer/
