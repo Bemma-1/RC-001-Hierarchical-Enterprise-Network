@@ -20,11 +20,11 @@ Headquarters (HQ)
 
 #### The headquarters serves as the core of the enterprise network and hosts:
 
-Core routing infrastructure
-Distribution layer switching
-Server infrastructure
-Network management services
-User access networks
+Core routing infrastructure,
+Distribution layer switching,
+Server infrastructure,
+Network management services,
+User access networks,
 Branch Offices
 
 #### The following branch offices are connected through routed WAN links:
