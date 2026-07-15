@@ -109,10 +109,10 @@ Emmanuel Ampong
 
 #### Research Interests:
 
-Enterprise Networking
-Cybersecurity
-Network Automation
-Secure Infrastructure Design
+Enterprise Networking,
+Cybersecurity,
+Network Automation,
+Secure Infrastructure Design,
 Threat Detection and Response
 
 #### Repository Structure
