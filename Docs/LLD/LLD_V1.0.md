@@ -8,6 +8,7 @@ Project Title
 Headquarters
 
 Device    	Function
+
 HQ-R1 -- Core Router
 HQ-SW1 --	Distribution Switch
 HQ-SW2	--  Access Switch
