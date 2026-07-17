@@ -6,6 +6,7 @@ Project Title
 
 #### Network Devices
 Headquarters
+
 Device    	Function
 HQ-R1 -- Core Router
 HQ-SW1 --	Distribution Switch
