@@ -6,28 +6,33 @@ Project Title
 
 #### Network Devices
 Headquarters
-Device	Function
-HQ-R1	Core Router
-HQ-SW1	Distribution Switch
-HQ-SW2	Access Switch
-SRV-1	Application Server
+Device    	Function
+HQ-R1 -- Core Router
+HQ-SW1 --	Distribution Switch
+HQ-SW2	--  Access Switch
+SRV-1	--  Application Server
+
 Accra Branch
-Device	Function
-ACC-R1	Branch Router
-ACC-SW1	Access Switch
+Device	   Function
+ACC-R1 -- 	Branch Router
+ACC-SW1	--  Access Switch
+
 Kumasi Branch
-Device	Function
-KUM-R1	Branch Router
-KUM-SW1	Access Switch
+Device	   Function
+KUM-R1 -- 	Branch Router
+KUM-SW1 --	Access Switch
+
 Takoradi Branch
-Device	Function
-TAK-R1	Branch Router
-TAK-SW1	Access Switch
-VLAN Design
-VLAN	Name	Subnet
-10	Users	192.168.10.0/24
-20	Servers	192.168.20.0/24
-99	Management	192.168.99.0/24
+Device  	Function
+TAK-R1	--  Branch Router
+TAK-SW1	--  Access Switch
+#####  VLAN Design
+VLAN	  Name	Subnet
+
+10	--  Users	192.168.10.0/24
+20	--  Servers	192.168.20.0/24
+99	--  Management	192.168.99.0/24
+
 Branch Addressing
 Accra
 192.168.30.0/24
