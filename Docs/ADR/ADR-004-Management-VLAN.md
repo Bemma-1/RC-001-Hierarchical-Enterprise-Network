@@ -1,115 +1,135 @@
-# ADR-004: Implementation of a Dedicated Management VLAN
+# RC001-ADR-004 — Dedicated Network Management VLAN
 
-## Status
+## Document Information
 
-Accepted
-
-## Date
-
-July 2026
-
-## Context
-
-Network devices require administrative access for:
-
-* Monitoring
-* Configuration
-* Maintenance
-* Troubleshooting
-
-Using production user networks for management traffic introduces several risks:
-
-* Unauthorized access attempts
-* Increased attack surface
-* Difficulty controlling administrative traffic
-* Reduced visibility of management activities
-
-The organization requires secure and centralized network administration.
+| Field       | Value                                           |
+| ----------- | ----------------------------------------------- |
+| Project     | RC-001 — Secure Hierarchical Enterprise Network |
+| Document ID | RC001-ADR-004                                   |
+| Version     | 1.0                                             |
+| Status      | Accepted                                        |
+| Author      | Emmanuel Ampong                                 |
+| Date        | 19 July 2026                                    |
 
 ---
 
-## Decision
+## 1. Context
 
-A dedicated Management VLAN (VLAN 99) shall be deployed.
+Routers and switches require IP connectivity for administration, monitoring, troubleshooting, and configuration.
 
-All manageable network devices shall receive management IP addresses from the Management VLAN.
-
-Only authorized administrators shall use this network for device management.
+Using ordinary end-user VLANs for infrastructure management would mix administrative and user traffic and make future security policy enforcement more difficult.
 
 ---
 
-## Rationale
+## 2. Decision
 
-### Security
+VLAN 99 shall be reserved for network management.
 
-Management traffic is isolated from regular user traffic.
+Management subnets:
 
-### Reduced Exposure
+* HQ — 10.10.99.0/27
+* Accra — 10.20.99.0/28
+* Takoradi — 10.30.99.0/28
 
-Administrative interfaces are not directly exposed to production user networks.
+Examples:
 
-### Simplified Monitoring
-
-Management traffic can be identified and monitored more easily.
-
-### Improved Troubleshooting
-
-Administrative access remains available even when production VLAN issues occur.
-
-### Industry Best Practice
-
-Dedicated management networks are widely used in enterprise environments.
+* HQ-SW1 — 10.10.99.2
+* HQ-SW2 — 10.10.99.3
+* ACC-SW1 — 10.20.99.2
+* TAK-SW1 — 10.30.99.2
 
 ---
 
-## Alternatives Considered
+## 3. Alternatives Considered
 
 ### Management Through User VLANs
 
-Pros:
+#### Advantages
 
-* Simpler deployment
-* Fewer VLANs required
+* Simpler initial configuration
 
-Cons:
+#### Disadvantages
 
-* Increased security risks
-* Reduced traffic separation
-* Limited administrative control
+* Mixes management and user traffic
+* Poor logical separation
+* Harder to secure later
+* Less professional operational model
 
-Decision:
-
-Rejected.
+**Decision:** Rejected.
 
 ---
 
-## Consequences
+### Dedicated Out-of-Band Management Network
 
-Positive:
+#### Advantages
 
-* Improved security
-* Better traffic separation
-* Enhanced manageability
+* Strong operational isolation
+* Management can remain available during some production-network failures
 
-Negative:
+#### Disadvantages
 
-* Additional VLAN administration
-* Additional IP address allocation
+* Requires additional infrastructure
+* Outside the scope of the Packet Tracer baseline
+
+**Decision:** Deferred.
 
 ---
 
-## Future Considerations
+### Dedicated Management VLAN
 
-Future versions may implement:
+#### Advantages
 
+* Logical separation
+* Easier infrastructure identification
+* Supports centralized SSH administration
+* Provides foundation for future ACL/AAA controls
+
+**Decision:** Accepted.
+
+---
+
+## 4. Security Limitation
+
+A management VLAN alone does not guarantee that only administrators can access management interfaces.
+
+Future controls should include:
+
+* ACLs
+* AAA
+* TACACS+ or RADIUS
+* Management firewall policy
 * Out-of-band management
-* AAA services
-* TACACS+
-* Centralized management systems
+
+RC-001 establishes the architectural foundation.
 
 ---
 
-## References
+## 5. Consequences
 
-Cisco Enterprise Management Design Guide
-NIST SP 800-115
+### Positive
+
+* Management addresses are organized separately.
+* Troubleshooting is easier.
+* Administrative traffic is logically separated.
+* Future management-access policies can be applied more cleanly.
+
+### Negative
+
+* Requires additional VLAN and subnet configuration.
+* Incorrect trunk configuration can disrupt management connectivity.
+* Additional policy controls are required for strong access restriction.
+
+---
+
+## 6. Related Documents
+
+* RC001-NRS-001
+* RC001-HLD-001
+* RC001-LLD-001
+* RC001-IPP-001
+
+---
+
+**Decision Status: ACCEPTED**
+
+**End of Document**

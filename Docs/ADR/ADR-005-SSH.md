@@ -1,135 +1,149 @@
-# ADR-005: Adoption of SSH for Secure Device Administration
+# RC001-ADR-005 — SSH Version 2 for Secure Device Administration
 
-## Status
+## Document Information
 
-Accepted
-
-## Date
-
-July 2026
-
-## Context
-
-Network administrators require remote access to routers and switches for:
-
-* Configuration
-* Monitoring
-* Maintenance
-* Troubleshooting
-
-Historically, Telnet has been used for remote administration. However, Telnet transmits credentials and management traffic in plaintext.
-
-This creates significant security risks, including:
-
-* Credential interception
-* Session hijacking
-* Unauthorized access
-* Information disclosure
-
-The organization requires secure remote administration capabilities.
+| Field       | Value                                           |
+| ----------- | ----------------------------------------------- |
+| Project     | RC-001 — Secure Hierarchical Enterprise Network |
+| Document ID | RC001-ADR-005                                   |
+| Version     | 1.0                                             |
+| Status      | Accepted                                        |
+| Author      | Emmanuel Ampong                                 |
+| Date        | 19 July 2026                                    |
 
 ---
 
-## Decision
+## 1. Context
 
-Secure Shell (SSH) Version 2 shall be implemented on all routers and switches.
+Network administrators require remote command-line access to routers and switches.
 
-Telnet access shall be disabled.
+Remote management protocols differ significantly in how they protect administrative sessions and credentials.
 
-Remote administration shall occur exclusively through SSH.
-
----
-
-## Rationale
-
-### Encryption
-
-SSH encrypts management traffic, protecting credentials and session data.
-
-### Authentication
-
-SSH supports secure user authentication.
-
-### Confidentiality
-
-Administrative commands cannot be easily intercepted during transmission.
-
-### Integrity
-
-SSH helps ensure management sessions are not modified in transit.
-
-### Industry Best Practice
-
-SSH is the standard protocol for secure network administration.
+The network therefore requires an encrypted remote-management protocol.
 
 ---
 
-## Alternatives Considered
+## 2. Decision
+
+RC-001 shall use **SSH Version 2** for remote CLI administration.
+
+Telnet shall not be required for normal remote administration.
+
+Infrastructure shall be configured with:
+
+* Device hostnames
+* Domain name
+* RSA keys
+* SSH Version 2
+* Local administrative accounts
+* VTY local authentication
+* SSH-only VTY transport
+
+---
+
+## 3. Alternatives Considered
 
 ### Telnet
 
-Pros:
+#### Advantages
 
-* Easy configuration
-* Minimal resource requirements
+* Simple
+* Widely understood
+* Easy to configure
 
-Cons:
+#### Disadvantages
 
-* Plaintext credentials
-* No encryption
-* Significant security risks
+* Does not provide adequate encryption for administrative sessions
+* Credentials and session data may be exposed on untrusted networks
+* Unsuitable as the preferred secure-management protocol
 
-Decision:
-
-Rejected.
-
----
-
-### Console-Only Administration
-
-Pros:
-
-* No remote attack surface
-
-Cons:
-
-* Operationally inefficient
-* Not practical for distributed branch environments
-
-Decision:
-
-Rejected.
+**Decision:** Rejected.
 
 ---
 
-## Consequences
+### SSH Version 1
 
-Positive:
+#### Advantages
 
-* Secure administrative access
-* Reduced credential exposure
-* Compliance with security best practices
+* Encrypted remote management compared with Telnet
 
-Negative:
+#### Disadvantages
 
-* Additional configuration requirements
-* SSH key management considerations
+* Obsolete protocol version
+* Known security weaknesses
+* Superseded by SSH Version 2
 
----
-
-## Future Considerations
-
-Future versions may implement:
-
-* TACACS+ authentication
-* Multi-factor authentication
-* Public key authentication
-* Centralized identity management
+**Decision:** Rejected.
 
 ---
 
-## References
+### SSH Version 2
 
-RFC 4251: Secure Shell Protocol Architecture
-Cisco Secure Management Best Practices
-NIST SP 800-53
+#### Advantages
+
+* Encrypted management sessions
+* Improved confidentiality
+* Widely supported
+* Appropriate for Cisco infrastructure administration
+
+**Decision:** Accepted.
+
+---
+
+## 4. Credential Handling
+
+Real personal passwords shall not be published in the GitHub repository.
+
+Public configuration examples shall use:
+
+* Lab-only credentials
+* Redacted values
+* Clearly identified placeholders
+
+No production secrets, API keys, private keys, or reusable personal credentials shall be committed.
+
+---
+
+## 5. Consequences
+
+### Positive
+
+* Administrative sessions are encrypted.
+* Telnet dependency is eliminated.
+* The project demonstrates secure-management fundamentals.
+* SSH supports future centralized AAA integration.
+
+### Negative
+
+* Requires hostname/domain configuration and RSA key generation.
+* Credentials must still be managed securely.
+* SSH alone does not provide complete identity governance.
+
+---
+
+## 6. Future Enhancements
+
+Future projects may introduce:
+
+* AAA
+* TACACS+
+* RADIUS
+* Role-based administrative access
+* Management ACLs
+* Centralized logging
+* Key-based authentication where supported
+
+---
+
+## 7. Related Documents
+
+* RC001-NRS-001
+* RC001-HLD-001
+* RC001-LLD-001
+* RC001-IPP-001
+
+---
+
+**Decision Status: ACCEPTED**
+
+**End of Document**

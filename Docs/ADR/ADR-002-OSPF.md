@@ -1,147 +1,175 @@
-# ADR-002: Selection of OSPF as the Dynamic Routing Protocol
+# RC001-ADR-002 — Selection of OSPF as the Interior Gateway Protocol
 
-## Status
+## Document Information
 
-Accepted
-
-## Date
-
-July 2026
-
-## Context
-
-The enterprise network requires dynamic routing between Headquarters and branch offices.
-
-The routing solution must:
-
-* Scale effectively
-* Support future growth
-* Converge quickly
-* Minimize administrative overhead
-* Operate using open standards
-
-Several routing protocols were evaluated.
+| Field       | Value                                           |
+| ----------- | ----------------------------------------------- |
+| Project     | RC-001 — Secure Hierarchical Enterprise Network |
+| Document ID | RC001-ADR-002                                   |
+| Version     | 1.0                                             |
+| Status      | Accepted                                        |
+| Author      | Emmanuel Ampong                                 |
+| Date        | 19 July 2026                                    |
 
 ---
 
-## Decision
+## 1. Context
 
-Open Shortest Path First (OSPF) was selected as the routing protocol for the enterprise network.
+The enterprise requires routing between:
 
-Single-area OSPF (Area 0) is implemented in Version 1.0.
+* Kumasi Headquarters
+* Accra Branch
+* Takoradi Branch
 
----
+The routing architecture must also support future branch expansion.
 
-## Rationale
-
-### Open Standard
-
-OSPF is vendor-neutral and interoperable across networking platforms.
-
-### Fast Convergence
-
-Route recalculation occurs rapidly following topology changes.
-
-### Scalability
-
-OSPF supports large enterprise environments.
-
-### Efficient Routing
-
-Shortest-path calculations optimize traffic forwarding.
-
-### Industry Adoption
-
-OSPF is widely deployed in enterprise networks and remains a valuable skill for networking professionals.
+A routing strategy was required that reduces manual route administration while providing a foundation for scalable enterprise routing.
 
 ---
 
-## Alternatives Considered
+## 2. Decision
+
+RC-001 shall use **Open Shortest Path First (OSPF)** as its Interior Gateway Protocol.
+
+The baseline implementation shall use:
+
+* OSPF Process ID 1
+* Area 0
+* Explicit router IDs
+* Passive LAN-facing interfaces where appropriate
+
+Router IDs:
+
+* HQ-R1 — 1.1.1.1
+* ACC-R1 — 2.2.2.2
+* TAK-R1 — 3.3.3.3
+
+---
+
+## 3. Alternatives Considered
+
+### Static Routing
+
+#### Advantages
+
+* Simple in very small networks
+* Predictable
+* Low protocol overhead
+
+#### Disadvantages
+
+* Manual maintenance
+* Poor scalability
+* Greater administrative burden as branches increase
+* Route changes require manual intervention
+
+**Decision:** Rejected as the primary enterprise routing strategy.
+
+---
 
 ### RIP
 
-Pros:
+#### Advantages
 
-* Easy configuration
-* Minimal learning curve
+* Simple configuration
+* Easy to understand
 
-Cons:
+#### Disadvantages
 
-* Slow convergence
 * Limited scalability
-* Hop-count restrictions
+* Hop-count metric
+* Maximum 15-hop routing diameter
+* Less appropriate for modern enterprise design
 
-Decision:
-
-Rejected.
+**Decision:** Rejected.
 
 ---
 
 ### EIGRP
 
-Pros:
+#### Advantages
 
-* Fast convergence
-* Efficient route calculation
+* Efficient convergence
+* Straightforward Cisco implementation
+* Advanced metric calculation
 
-Cons:
+#### Disadvantages
 
-* Historically Cisco-centric
-* Less commonly adopted in heterogeneous environments
+* Historically associated primarily with Cisco-centric environments
+* OSPF provides stronger standards-oriented relevance for this research portfolio
 
-Decision:
-
-Rejected.
-
----
-
-### Static Routing
-
-Pros:
-
-* Simple in small environments
-* Full administrator control
-
-Cons:
-
-* High administrative overhead
-* Poor scalability
-* Difficult maintenance
-
-Decision:
-
-Rejected.
+**Decision:** Not selected.
 
 ---
 
-## Consequences
+### OSPF
 
-Positive:
+#### Advantages
 
-* Improved scalability
-* Faster convergence
-* Reduced administrative effort
-* Enterprise-ready routing design
+* Open-standard link-state protocol
+* Dynamic route learning
+* Scalable hierarchical design capability
+* Supports future multi-area architecture
+* Widely used in enterprise networking
+* Suitable for route convergence experiments
 
-Negative:
-
-* Greater configuration complexity than RIP
-* Additional troubleshooting considerations
+**Decision:** Accepted.
 
 ---
 
-## Future Considerations
+## 4. Rationale
 
-Future project phases may evaluate:
+OSPF provides an appropriate balance between:
+
+* Enterprise relevance
+* Scalability
+* Dynamic routing capability
+* Research value
+* Packet Tracer support
+
+The single-area Area 0 implementation is appropriate for the current topology while allowing future expansion toward multi-area OSPF.
+
+---
+
+## 5. Consequences
+
+### Positive
+
+* Routes are dynamically learned.
+* New internal networks can be advertised without creating static routes on every router.
+* The design supports routing convergence experiments.
+* Future branch expansion is easier.
+
+### Negative
+
+* OSPF is more complex than static routing.
+* Incorrect network statements can create routing problems.
+* OSPF requires troubleshooting knowledge.
+
+---
+
+## 6. Future Evolution
+
+Future research may evaluate:
 
 * Multi-area OSPF
 * Route summarization
 * OSPF authentication
-* Redistribution strategies
+* Redundant paths
+* OSPF convergence under link failure
+* Comparison with other routing approaches
 
 ---
 
-## References
+## 7. Related Documents
 
-RFC 2328: OSPF Version 2
-Cisco OSPF Design Guide
+* RC001-NRS-001
+* RC001-HLD-001
+* RC001-LLD-001
+* RC001-IPP-001
+
+---
+
+**Decision Status: ACCEPTED**
+
+**End of Document**

@@ -1,117 +1,161 @@
-# ADR-003: Adoption of VLAN-Based Network Segmentation
+# RC001-ADR-003 — VLAN-Based Network Segmentation
 
-## Status
+## Document Information
 
-Accepted
-
-## Date
-
-July 2026
-
-## Context
-
-The enterprise network serves multiple groups of users, servers, and administrators. A flat Layer 2 network would place all devices within a single broadcast domain, leading to:
-
-* Excessive broadcast traffic
-* Reduced performance
-* Increased security risks
-* Limited traffic isolation
-* Difficult policy enforcement
-
-The organization requires logical separation of network resources while maintaining efficient communication.
+| Field       | Value                                           |
+| ----------- | ----------------------------------------------- |
+| Project     | RC-001 — Secure Hierarchical Enterprise Network |
+| Document ID | RC001-ADR-003                                   |
+| Version     | 1.0                                             |
+| Status      | Accepted                                        |
+| Author      | Emmanuel Ampong                                 |
+| Date        | 19 July 2026                                    |
 
 ---
 
-## Decision
+## 1. Context
 
-Virtual Local Area Networks (VLANs) shall be implemented to logically segment the enterprise network.
+The headquarters supports multiple organizational functions:
 
-The following VLANs are deployed:
+* Human Resources
+* Finance
+* Operations
+* Information Technology
+* Executive/Management
+* Servers
+* Network Management
 
-| VLAN ID | Name       | Purpose                |
-| ------- | ---------- | ---------------------- |
-| 10      | Users      | End-user devices       |
-| 20      | Servers    | Enterprise servers     |
-| 99      | Management | Network administration |
-
-Inter-VLAN communication shall be controlled through Layer 3 routing.
-
----
-
-## Rationale
-
-### Improved Security
-
-Sensitive resources such as servers and management interfaces are isolated from general user traffic.
-
-### Reduced Broadcast Domains
-
-Broadcast traffic remains within individual VLAN boundaries, improving overall network efficiency.
-
-### Better Network Organization
-
-Departments and services can be logically grouped regardless of physical location.
-
-### Simplified Administration
-
-Network policies can be applied consistently at VLAN boundaries.
-
-### Scalability
-
-Additional VLANs can be introduced as organizational requirements grow.
+Placing all devices in a single Layer 2 broadcast domain would reduce scalability and make network administration more difficult.
 
 ---
 
-## Alternatives Considered
+## 2. Decision
 
-### Flat Network
+IEEE 802.1Q VLAN segmentation shall be used.
 
-Pros:
+Headquarters VLANs:
 
-* Easy deployment
-* Minimal configuration
+| VLAN | Function               |
+| ---: | ---------------------- |
+|   10 | Human Resources        |
+|   20 | Finance                |
+|   30 | Operations             |
+|   40 | Information Technology |
+|   50 | Executive/Management   |
+|   60 | Servers                |
+|   99 | Network Management     |
 
-Cons:
+Branches shall use:
 
-* Large broadcast domains
-* Reduced security
+* VLAN 10 — Users
+* VLAN 99 — Management
+
+Each VLAN shall map to a unique IP subnet.
+
+---
+
+## 3. Alternatives Considered
+
+### Flat Layer 2 Network
+
+#### Advantages
+
+* Simple initial setup
+
+#### Disadvantages
+
+* Large broadcast domain
+* Poor logical organization
 * Difficult troubleshooting
 * Limited scalability
+* Weak foundation for future security policies
 
-Decision:
-
-Rejected.
-
----
-
-## Consequences
-
-Positive:
-
-* Enhanced security
-* Improved performance
-* Better traffic management
-* Increased scalability
-
-Negative:
-
-* Additional configuration complexity
-* Requirement for inter-VLAN routing
+**Decision:** Rejected.
 
 ---
 
-## Future Considerations
+### Physical Network Separation
 
-Potential future VLANs include:
+Departments could use completely separate physical switching infrastructure.
 
-* Voice VLAN
-* Guest VLAN
-* Wireless VLAN
-* Security Operations VLAN
+#### Advantages
+
+* Strong physical separation
+
+#### Disadvantages
+
+* Higher equipment requirements
+* Inefficient port utilization
+* Greater operational complexity
+* Less flexible than logical segmentation
+
+**Decision:** Rejected.
 
 ---
 
-## References
+### VLAN Segmentation
 
-IEEE 802.1Q VLAN Standard
-Cisco Campus Network Design Guide
+#### Advantages
+
+* Creates separate broadcast domains
+* Supports logical departmental organization
+* Efficiently uses shared switching infrastructure
+* Simplifies subnet design
+* Creates a foundation for future access-control policies
+
+**Decision:** Accepted.
+
+---
+
+## 4. Important Security Limitation
+
+VLAN segmentation does **not by itself guarantee access-control isolation** once inter-VLAN routing is enabled.
+
+In RC-001, VLANs provide:
+
+* Broadcast-domain separation
+* Logical segmentation
+* Structured addressing
+* A foundation for future security enforcement
+
+Comprehensive restrictions between departments require controls such as:
+
+* ACLs
+* Firewalls
+* Identity-based policy
+
+These are outside the baseline RC-001 scope.
+
+---
+
+## 5. Consequences
+
+### Positive
+
+* Smaller broadcast domains
+* Better organization
+* Easier troubleshooting
+* Scalable departmental design
+* Foundation for future policy enforcement
+
+### Negative
+
+* Requires trunk configuration
+* Requires Layer 3 routing between VLANs
+* VLAN/trunk mismatches can cause connectivity failures
+* Additional security controls are required for strict inter-department authorization
+
+---
+
+## 6. Related Documents
+
+* RC001-NRS-001
+* RC001-HLD-001
+* RC001-LLD-001
+* RC001-IPP-001
+
+---
+
+**Decision Status: ACCEPTED**
+
+**End of Document**
