@@ -1,0 +1,12 @@
+# Cisco Packet Tracer backup files
+*.bak
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# Temporary files
+*.tmp
