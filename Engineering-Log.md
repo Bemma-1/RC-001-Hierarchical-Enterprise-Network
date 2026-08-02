@@ -101,6 +101,7 @@ Rebuild the RC-001 Packet Tracer topology and save it as `RC-001-v0.1.pkt`.
 
 ---
 
+
 # Session 3– Physical Topology Reconstruction (Milestone M2)
 
 **Date:** 2 August 2026
@@ -231,6 +232,9 @@ The topology was recreated according to the validated High-Level Design (HLD) an
 - Configure management VLAN
 - Verify VLAN database
 
+
+
+
 # Session 4– VLAN Implementation (Milestone M3)
 
 **Date:** 2 August 2026
@@ -259,3 +263,57 @@ Configured the enterprise VLAN structure across headquarters and branch switches
 ## Next Objective
 
 Configure IEEE 802.1Q trunk links between switches and routers.
+
+
+---
+
+# Session 4 – IEEE 802.1Q Trunk Configuration (Milestone M4)
+
+**Date:** 2 August 2026
+
+## Objective
+
+Implement IEEE 802.1Q trunking across the enterprise network to support inter-VLAN communication.
+
+## Tasks Completed
+
+- Configured trunk links between HQ switches.
+- Configured trunk links between routers and access switches.
+- Configured native VLAN 99.
+- Restricted allowed VLANs to:
+  - 10
+  - 20
+  - 30
+  - 40
+  - 50
+  - 60
+  - 99
+- Added interface descriptions.
+- Saved switch configurations.
+
+## Validation
+
+Verified trunk operation using:
+
+- `show interfaces trunk`
+
+Validated:
+
+- Trunk state
+- Encapsulation
+- Native VLAN
+- Allowed VLANs
+- Forwarding VLANs
+
+All four switches successfully passed verification.
+
+## Lessons Learned
+
+- Trunk ports carry multiple VLANs over a single physical connection.
+- Matching native VLANs on both ends prevents VLAN mismatch issues.
+- Restricting allowed VLANs is a good security and performance practice.
+- `show interfaces trunk` is the primary verification command for trunk links.
+
+## Next Objective
+
+Implement Router-on-a-Stick (Inter-VLAN Routing).
