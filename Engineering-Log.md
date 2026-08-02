@@ -101,7 +101,7 @@ Rebuild the RC-001 Packet Tracer topology and save it as `RC-001-v0.1.pkt`.
 
 ---
 
-# Session 2 – Physical Topology Reconstruction (Milestone M2)
+# Session 3– Physical Topology Reconstruction (Milestone M2)
 
 **Date:** 2 August 2026
 
@@ -230,3 +230,32 @@ The topology was recreated according to the validated High-Level Design (HLD) an
 - Configure VLANs
 - Configure management VLAN
 - Verify VLAN database
+
+# Session 4– VLAN Implementation (Milestone M3)
+
+**Date:** 2 August 2026
+
+
+**Objective**
+Configured the enterprise VLAN structure across headquarters and branch switches.
+
+## Tasks Completed
+
+- Created VLANs 10, 20, 30, 40, 50, 60 and 99.
+- Assigned descriptive VLAN names.
+- Configured access ports according to the Low-Level Design.
+- Verified VLAN creation using `show vlan brief`.
+
+## Validation
+
+- VLAN database verified on all switches.
+- Access ports assigned to the correct VLANs.
+
+## Lessons Learned
+
+- Consistent VLAN numbering across sites simplifies management.
+- Descriptive VLAN names improve readability and troubleshooting.
+
+## Next Objective
+
+Configure IEEE 802.1Q trunk links between switches and routers.
